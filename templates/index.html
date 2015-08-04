@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+
+{% block projects %}
+    {% for post in p %}
+<div class="projects">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            {% if post.in_development %}
+                                <i class="fa fa-pencil-square-o"></i>
+                                {% else %}
+                                <i class="fa fa-check-square-o"></i>
+                            {% endif %}
+                            {{ post.name }}
+                            <small>{{ post.info }}</small>
+                            <small class = "date">{{ post.date }}</small>
+                        </h1>
+                    </div>
+                 </div>
+        <!-- /.row -->
+
+        <!-- Project One -->
+        <div class="row" style="position: relative;">
+            <div class="col-md-7">
+                <a href="#">
+                    <img class="img-responsive" src="{{ post.image }}" alt="" height="300" width="700">
+                </a>
+            </div>
+            <div class="col-md-5">
+                {% for t in post.tags.all %}
+                    {{ t.html | safe}}
+                {% endfor %}
+                <p>{{ post.description | safe }}</p>
+
+            </div>
+
+            <a href="{{ post.source_url }}" class="btn btn-default" style = " line-height: 1; position:
+            absolute; bottom: 0; right: 15px;" > {{ post.source_type | safe }}</a>
+
+            {%  if post.download_url %}
+                <a href="{{ post.download_url }}" class="btn btn-default" style = " line-height: 1; position: absolute; bottom: 0;
+                right:
+                    {% if post.get_source_type_display == 'GITHUB' %}
+                    250px;
+                    {% elif post.get_source_type_display == 'GMK' %}
+                    220px;
+                    {% endif %}
+                        " ><i class="fa fa-download"></i><span class="network-name">Download</span></a>
+            {% endif %}
+        </div>
+        <!-- /.row -->
+
+        </div>
+    {% endfor %}
+{% endblock %}
