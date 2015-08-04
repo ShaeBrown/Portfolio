@@ -31,8 +31,13 @@ h6 {
 }
 .date {
     float: right;
-    font-size: 20px;
-    line-height: 60px;
+    font-size: 15px;
+    line-height: 40px;
+}
+
+.section-header {
+    font-family: 'EB Garamond', serif;
+    font-size: 50px;
 }
 p {
     margin: 0 0 25px;
@@ -207,6 +212,21 @@ a:focus {
     transition: background .3s ease-in-out;
 }
 
+.btn-circle-social {
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+    padding: 2px 2px;
+    border: 2px solid #fff;
+    border-radius: 100%!important;
+    font-size: 25px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
 .btn-circle:hover,
 .btn-circle:focus {
     outline: 0;
@@ -276,11 +296,12 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
+    background: url(../img/pattern.png)  center center scroll;
+    background-repeat: repeat;
+    background-size: auto, cover;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
     -o-background-size: cover;
 }
 
@@ -319,6 +340,7 @@ a:focus {
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
     background-color: transparent;
+    margin: 5px 5px;
 }
 
 .btn-default:hover,
@@ -335,7 +357,7 @@ a:focus {
     background-color: #337ab7;
     padding: 5px 10px;
     height: 30px;
-    margin: 1px 1px 10px;
+    margin: 5px 2px;
 }
 
 .text-inside {
