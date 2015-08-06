@@ -1,9 +1,9 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
-from projects.models import Project
+from projects.models import Project, Tag
 
 
-def index(request):
+def featured(request):
     p = Project.objects.filter(featured = True)
-    return render(request,'../templates/index.html', {'p': p })
+    return render(request,'../templates/project.html', {'p': p })

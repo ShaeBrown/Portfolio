@@ -326,6 +326,13 @@ a:focus {
     }
 }
 
+.custom-icon {
+    font-size: 20px;
+    line-height: 8px;
+    vertical-align: middle;
+}
+
+
 .btn {
     border-radius: 0;
     text-transform: uppercase;
