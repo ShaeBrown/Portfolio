@@ -30,3 +30,31 @@ $('.navbar-collapse ul li a').click(function() {
 });
 
 
+$(function() {
+    $('a').click(function() {
+        var $i =  $(this).find('i');
+        if ($i.hasClass('fa-caret-right')) {
+            $i.addClass('fa-caret-down');
+            $i.removeClass('fa-caret-right');
+        }
+        else if ($i.hasClass('fa-caret-down')) {
+            $i.addClass('fa-caret-right');
+            $i.removeClass('fa-caret-down');
+        }
+    });
+});
+
+$('[data-toggle="collapse"]').click(function() 
+{ 
+  if ($(this).text() == "Display Code") 
+  { 
+     $(this).text("Hide Code"); 
+  } 
+  else if ($(this).text() == "Hide Code") 
+  { 
+     $(this).text("Display Code"); 
+  }
+});
+
+
+

@@ -1,9 +1,11 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
-from projects.models import Project, Tag
+from projects.models import Project, code, codeGroup
 
 
 def featured(request):
     p = Project.objects.filter(featured = True)
-    return render(request,'../templates/project.html', {'p': p })
+    g = codeGroup.objects.filter(featured = True)
+    return render(request,'../templates/project.html', {'p': p , 'g' : g})
+

@@ -31,3 +31,36 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+class codeGroup(models.Model):
+
+    id = models.SlugField(primary_key=True,unique=True,max_length=10)
+    featured = models.BooleanField()
+    name = models.CharField(max_length = 20)
+    info = models.CharField(max_length = 30)
+
+    def codes(self):
+        c =  code.objects.filter(group__id = self.id)
+        return c
+
+    def __str__(self):
+        return self.name
+
+class code(models.Model):
+
+    id = models.SlugField(primary_key=True,unique=True,max_length=10)
+
+    name = models.CharField(max_length=10)
+    suffix = models.CharField(max_length=4)
+    tags =  models.ManyToManyField('Tag')
+    description = models.TextField(blank = True)
+    source = models.URLField()
+    group = models.ForeignKey('codeGroup')
+
+
+    def __str__(self):
+        return self.name
+
+
+
+
+

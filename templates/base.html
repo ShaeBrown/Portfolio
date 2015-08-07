@@ -28,6 +28,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 </head>
 
@@ -84,9 +90,13 @@
 
     <!-- Project Section -->
     <section id="project" class="container content-section text-center">
-            <h2 class = "section-header">Projects</h2>
+            <h3 class = "section-header">Projects</h3>
 
             {% block projects %}{% endblock %}
+
+            <h3 class = "section-header">Code</h3>
+
+            {% block code %}{% endblock %}
 
 
     <!-- /.container -->
