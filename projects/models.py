@@ -6,6 +6,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=10)
     button_contents = models.TextField(blank=True)
     color = models.CharField(max_length = 7, default="#337ab7")
+    id = models.SlugField(primary_key=True)
 
 
     def __str__(self):
@@ -37,6 +38,7 @@ class codeGroup(models.Model):
     featured = models.BooleanField()
     name = models.CharField(max_length = 20)
     info = models.CharField(max_length = 30)
+    c = []
 
     def codes(self):
         c =  code.objects.filter(group__id = self.id)

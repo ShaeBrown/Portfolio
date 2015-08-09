@@ -20,4 +20,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^$', 'projects.views.featured'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^(?P<slug>[^\.]+)',
+    'projects.views.tag')
 ]

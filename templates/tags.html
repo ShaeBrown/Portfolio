@@ -78,7 +78,7 @@
                         in
                         {% endif %}col-lg-10 col-lg-offset-1">
 
-                            {% for code in group.codes %}
+                            {% for code in group.c %}
                             <h2 style="margin: 10px 0px;">{{ code.name | safe }}<small>.{{ code.suffix | safe }}</small>
                             {% for t in code.tags.all %}
                             <a href = "{{ t.name | safe}} "class = "btn btn-tag" style = "background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
