@@ -33,19 +33,65 @@ h3 {
     margin-top: 100px;
     margin-bottom: 50px;
     font-family: 'EB Garamond', serif;
-    font-weight: 100;
-    font-size: 50px;
-    letter-spacing: 3px;
+    font-weight: 300;
+    font-size: 45px;
+    letter-spacing: 5px;
     color: #FEF6EB;
 
 }
 
+h5 {
+    margin-top: 200px;
+    margin-bottom: 50px;
+    font-weight: 100;
+    text-align: left;
+    font-size: 40px;
+    letter-spacing: 5px;
+    color: #FEF6EB;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
 p {
     margin: 0 0 25px;
     font-size: 18px;
-    line-height: 2;
+    line-height: 1.5;
     word-wrap: break-word;
     letter-spacing: 0.5px;
+}
+
+.line-header {
+    padding: 0 15px;
+    display: table;
+    white-space: nowrap;
+}
+
+.line-header:before {
+    background: linear-gradient(to bottom, white, whitesmoke) no-repeat left center / 95% 1px;
+    content: "";
+    display: table-cell;
+    width: 50%;
+}
+
+.line-header:after {
+    background: linear-gradient(to bottom, white, whitesmoke) no-repeat right center / 95% 1px;
+    content: "";
+    display: table-cell;
+    width: 50%;
+}
+
+.download-buttons {
+    margin-top: 0px;
+}
+
+.bottom-buttons {
+    margin-top: 15px;
+    line-height: 1.2;
+    float: right;
+}
+
+@media (min-width: 768px) {
+    .download-buttons {
+        margin-top: -45px;
+    }
 }
 
 @media(min-width:768px) {
@@ -73,6 +119,10 @@ a:focus {
     font-weight: 400;
 }
 
+.date {
+    float: right;
+    line-height: 40px;
+}
 .navbar-custom {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
@@ -159,7 +209,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/sky.jpg) no-repeat bottom center scroll;
+    background: url(../img/dos.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -184,6 +234,21 @@ a:focus {
     text-align: left;
     margin-bottom: 50px;
 }
+
+.btn-primary-disabled,
+.btn-primary-disabled:hover,
+.btn-primary-disabled:focus {
+    color: #FFFFFF;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.form-control {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 
 @media(min-width:768px) {
     .intro {
@@ -297,7 +362,7 @@ a:focus {
     width: 100%;
     padding: 50px 0px;
     color: #fff;
-    background: url(../img/pattern.png) no-repeat center center scroll;
+    background: url(../img/pattern.png) repeat;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;

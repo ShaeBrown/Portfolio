@@ -30,58 +30,56 @@
             </div>
             <div class="col-md-5">
                 {% for t in post.tags.all %}
-                    <a href = "{{ t.name | safe}} "class = "btn btn-tag" style = "background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
+                    <a href="{{ t.id | safe }} " class="btn btn-tag"
+                       style="background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
                 {% endfor %}
                 <p>{{ post.description | safe }}</p>
 
             </div>
 
-          <div class="col-md-12">
-                <a href="{{ post.source_url }}" class="btn btn-default" style = " line-height: 1; float:right;" >{{ post.source_type | safe }}</a>
-                 <a href="" class="btn btn-default" style = "line-height: 1.2; float:right;" ><i class="fa fa-download"></i><span class="network-name">Download</span></a>
+            <div class="col-md-12 download-buttons">
+                <a href="{{ post.source_url }}" class="btn btn-default bottom-buttons">{{ post.source_type | safe }}</a>
 
-
-            {%  if post.download_url %}
-                <a href="{{ post.download_url }}" class="btn btn-default" style = "line-height: 1.2; float:right;" ><i class="fa fa-download"></i><span class="network-name">Download</span></a>
-            {% endif %}
-        </div>
-        </div>
+                {% if post.download_url %}
+                    <a href="{{ post.download_url }}" class="btn btn-default bottom-buttons"><i
+                            class="fa fa-download"></i><span class="network-name">Download</span></a>
+                {% endif %}
+            </div>
         <!-- /.row -->
 
         </div>
+</div>
     {% endfor %}
 {% endblock %}
 
 {% block code %}
+    {% for group in g %}
+        <div class="col-lg-12 projects">
 
-        <div class="projects">
 
-
-                <div class = "col-lg-12">
-
-                    {% for group in g %}
 
                     <div class="btn-group" data-toggle="buttons-checkbox">
-                        <h1><a class = "btn collapse-data-btn" data-toggle = "collapse" href="#{{ group.id | safe}}" style = "font-size: 15px;"><i class="fa {% if group.featured  %}
-                        fa-caret-down
-                        {% else %}
-                        fa-caret-right
-                        {% endif %}
-                        "></i></a>{{ group.name | safe }}
+                        <h1><a class="btn collapse-data-btn" data-toggle="collapse" href="#{{ group.id | safe }}"
+                               style="font-size: 15px;"><i class="fa fa-caret-right
+                        "></i></a>
+
+                            {% if group.source %}
+                                <a href="{{ group.source | safe }}"> {{ group.name | safe }} </a>
+                            {% else %}
+                                {{ group.name | safe }}
+                            {% endif %}
                             <small>{{ group.info | safe }}</small>
 
                         </h1>
                     </div>
 
-                        <div id="{{ group.id | safe }}" class="collapse
-                        {% if group.featured %}
-                        in
-                        {% endif %}col-lg-10 col-lg-offset-1">
+            <div id="{{ group.id | safe }}" class="collapse col-lg-10 col-lg-offset-1">
 
                             {% for code in group.c %}
                             <h2 style="margin: 10px 0px;">{{ code.name | safe }}<small>.{{ code.suffix | safe }}</small>
                             {% for t in code.tags.all %}
-                            <a href = "{{ t.name | safe}} "class = "btn btn-tag" style = "background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
+                                <a href="{{ t.id | safe }} " class="btn btn-tag"
+                                   style="background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
                             {% endfor %}
 
                             </h2>
@@ -98,7 +96,5 @@
                         </div>
                         </div>
                         </div>
-                        </div>
-
     {% endfor %}
 {% endblock %}
