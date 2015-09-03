@@ -7,6 +7,14 @@ class Tag(models.Model):
     color = models.CharField(max_length = 7, default="#337ab7")
     id = models.SlugField(max_length=10, primary_key=True)
 
+    def count(self):
+        return Project.objects.filter(tags__id=id).count() + code.objects.filter(tags__id=id).count()
+
+    def top(self):
+        tags = Tag.objects.all()
+        sort = sorted(tags, key=lambda a: a.count())
+        return sort[:3]
+
     def __str__(self):
         return self.name
 
@@ -59,7 +67,6 @@ class code(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 

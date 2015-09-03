@@ -19,7 +19,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', 'projects.views.featured'),
+    url(r'^search/$', 'projects.views.search', name='search'),
+    url(r'^all$', 'projects.views.all'),
     url(r'^admin', include(admin.site.urls)),
     url(r'^(?P<slug>[^\.]+)',
-    'projects.views.tag')
+        'projects.views.tag'),
+
 ]

@@ -2,6 +2,10 @@
 {% extends 'base.html' %}
 
 {% block projects %}
+    <h4>viewing {% for t in tag %}
+        {{ t.name }}
+    {% endfor %}..</h4>
+    <h5 class="section-header" style="margin-top: 20px;">Projects</h5>
     {% for post in p %}
 
 <div class="projects">
@@ -53,6 +57,10 @@
 {% endblock %}
 
 {% block code %}
+
+    {% if g %}
+        <h5 class="section-header">Code</h5>
+    {% endif %}
     {% for group in g %}
         <div class="col-lg-12 projects">
 
@@ -76,7 +84,8 @@
             <div id="{{ group.id | safe }}" class="collapse col-lg-10 col-lg-offset-1">
 
                             {% for code in group.c %}
-                            <h2 style="margin: 10px 0px;">{{ code.name | safe }}<small>.{{ code.suffix | safe }}</small>
+
+                                <h2 style="margin: 10px 0px;">{{ code.name | safe }}<small>.{{ code.suffix | safe }}</small>
                             {% for t in code.tags.all %}
                                 <a href="{{ t.id | safe }} " class="btn btn-tag"
                                    style="background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
