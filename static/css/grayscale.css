@@ -92,7 +92,7 @@ p {
     float: right;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .download-buttons {
         margin-top: -45px;
     }
