@@ -29,6 +29,7 @@ def search(request):
     query = request.GET.get('input').split()
 
     if query:
+
         pset = Q()
         gset = Q()
         cset = Q()
@@ -61,10 +62,12 @@ def search(request):
         for group in c:
             group.c = group.codes().filter(codeset)
 
-        g = chain(g, c)
+        g = list(g)
+        c = list(c)
+
+        g = g + list(set(c) - set(g))
 
     else:
-
         p = Project.objects.all()
         g = codeGroup.objects.all()
 
