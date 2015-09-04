@@ -8,12 +8,9 @@ class Tag(models.Model):
     id = models.SlugField(max_length=10, primary_key=True)
 
     def count(self):
-        return Project.objects.filter(tags__id=id).count() + code.objects.filter(tags__id=id).count()
-
-    def top(self):
-        tags = Tag.objects.all()
-        sort = sorted(tags, key=lambda a: a.count())
-        return sort[:3]
+        projects = Project.objects.filter(tags__id=self.id)
+        codes = code.objects.filter(tags__id=self.id)
+        return projects.count() + codes.count()
 
     def __str__(self):
         return self.name

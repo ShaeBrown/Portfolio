@@ -31,6 +31,8 @@ STATICFILES_DIRS = (
     'static',
 )
 
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -41,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'projects',
+    'projects.templatetags'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]

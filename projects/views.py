@@ -2,7 +2,6 @@
 from django.shortcuts import render
 from django.db.models import Q
 from projects.models import Project, codeGroup, code, Tag
-from itertools import chain
 
 
 def featured(request):

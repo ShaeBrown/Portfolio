@@ -4,6 +4,9 @@
     <h4>viewing search for "{% for q in query %}
         {{ q }}
     {% endfor %}"..</h4>
+    {% if not p and not g %}
+        <h4>no projects or codes found</h4>
+    {% endif %}
     {% if p %}
         <h5 class="section-header" style="margin-top: 20px;">Projects</h5>
 

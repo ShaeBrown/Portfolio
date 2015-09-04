@@ -1,0 +1,3 @@
+{% for t in tags %}
+    <li><a href="/{{ t.id | safe }}">{{ t.name | safe }}</a></li>
+{% endfor %}
