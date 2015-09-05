@@ -119,6 +119,10 @@ a:focus {
     color: #42dca3;
 }
 
+.contact-form {
+    background: transparent;
+    color: white;
+}
 .light {
     font-weight: 400;
 }

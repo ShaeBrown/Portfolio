@@ -5,19 +5,19 @@ from projects.models import Project, codeGroup, code, Tag
 
 
 def featured(request):
-    p = Project.objects.filter(featured=True)
+    p = Project.objects.filter(featured=True).order_by('-date')
     g = codeGroup.objects.filter(featured=True)
     return render(request, '../templates/featured.html', {'p': p, 'g': g})
 
 
 def all(request):
-    p = Project.objects.all()
+    p = Project.objects.all().order_by('-date')
     g = codeGroup.objects.all()
     return render(request, '../templates/all.html', {'p': p, 'g': g})
 
 def tag(request, slug):
     tag = Tag.objects.filter(id=slug).distinct()
-    p = Project.objects.filter(tags__id=slug).distinct()
+    p = Project.objects.filter(tags__id=slug).distinct().order_by('-date')
     g = codeGroup.objects.filter(code__tags__id=slug).distinct()
     for group in g:
         group.c = code.objects.filter(tags__id=slug, group__id=group.id)
@@ -35,6 +35,7 @@ def search(request):
         codeset = Q()
 
         for term in query:
+
             pset |= Q(name__contains=term)
             pset |= Q(info__contains=term)
             pset |= Q(description__contains=term)
@@ -52,7 +53,7 @@ def search(request):
             codeset |= Q(name__contains=term)
 
         c = codeGroup.objects.filter(cset).distinct()
-        p = Project.objects.filter(pset).distinct()
+        p = Project.objects.filter(pset).distinct().order_by('-date')
         g = codeGroup.objects.filter(gset).distinct()
 
         for group in g:
@@ -67,6 +68,7 @@ def search(request):
         g = g + list(set(c) - set(g))
 
     else:
+
         p = Project.objects.all()
         g = codeGroup.objects.all()
 
