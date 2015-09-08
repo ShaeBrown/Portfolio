@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 from projects.models import Project, codeGroup, code, Tag
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def featured(request):
@@ -13,6 +14,16 @@ def featured(request):
 def all(request):
     p = Project.objects.all().order_by('-date')
     g = codeGroup.objects.all()
+    paginator = Paginator(p, 5)
+    page = request.GET.get('page')
+    try:
+        p = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        p = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        p = paginator.page(paginator.num_pages)
     return render(request, '../templates/all.html', {'p': p, 'g': g})
 
 def tag(request, slug):
@@ -21,6 +32,16 @@ def tag(request, slug):
     g = codeGroup.objects.filter(code__tags__id=slug).distinct()
     for group in g:
         group.c = code.objects.filter(tags__id=slug, group__id=group.id)
+    paginator = Paginator(p, 5)
+    page = request.GET.get('page')
+    try:
+        p = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        p = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        p = paginator.page(paginator.num_pages)
     return render(request, '../templates/tags.html', {'tag': tag, 'p': p, 'g': g})
 
 
