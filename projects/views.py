@@ -2,19 +2,21 @@ from django.shortcuts import render, HttpResponse
 from django.db.models import Q
 from projects.models import Project, codeGroup, code, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from projects.filters import ProjectFilter
+from projects.filters import ProjectFilter, CodeFilter
 
 
 def featured(request):
     p = Project.objects.filter(featured=True)
     p = ProjectFilter(request.GET, queryset=p)
     g = codeGroup.objects.filter(featured=True)
+    g = CodeFilter(request.GET, queryset=g)
     return render(request, '../templates/featured.html', {'p': p, 'g': g})
 
 
 def all(request):
     p = Project.objects.all()
     g = codeGroup.objects.all()
+    g = CodeFilter(request.GET, queryset=g)
     p = ProjectFilter(request.GET, queryset=p)
     paginator = Paginator(p, 2)
     page = request.GET.get('page')
@@ -33,8 +35,11 @@ def tag(request, slug):
     p = Project.objects.filter(tags__id=slug).distinct()
     p = ProjectFilter(request.GET, queryset=p)
     g = codeGroup.objects.filter(code__tags__id=slug).distinct()
+
     for group in g:
         group.c = code.objects.filter(tags__id=slug, group__id=group.id)
+
+    g = CodeFilter(request.GET, queryset=g)
     paginator = Paginator(p, 5)
     page = request.GET.get('page')
     try:
@@ -101,11 +106,13 @@ def search(request):
 
             p = Project.objects.all()
             g = codeGroup.objects.all()
+
         request.session['p'] = p
         request.session['g'] = g
         request.session['q'] = query
 
     p = ProjectFilter(request.GET, queryset=p)
+
     paginator = Paginator(p, 2)
     page = request.GET.get('page')
     try:

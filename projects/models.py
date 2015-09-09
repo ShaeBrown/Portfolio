@@ -43,6 +43,7 @@ class codeGroup(models.Model):
     info = models.CharField(max_length=50)
     source = models.URLField(blank=True)
     c = []
+    date = models.DateField()
 
     def codes(self):
         c =  code.objects.filter(group__id = self.id)
