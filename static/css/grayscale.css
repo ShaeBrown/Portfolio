@@ -92,6 +92,13 @@ p {
     float: right;
 }
 
+.dropdown-buttons {
+    padding: 3px 20px;
+    background-color: transparent;
+    color: black;
+    border-width: 0px;
+}
+
 @media (min-width: 992px) {
     .download-buttons {
         margin-top: -45px;
