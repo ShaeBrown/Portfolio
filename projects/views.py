@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponse
-from django.db.models import Q
+from django.shortcuts import render, HttpResponseRedirect
 from projects.models import Project, codeGroup, code, Tag
+from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from projects.filters import ProjectFilter, CodeFilter
-
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
 
 def featured(request):
     p = Project.objects.filter(featured=True)
@@ -11,6 +13,27 @@ def featured(request):
     g = codeGroup.objects.filter(featured=True)
     g = CodeFilter(request.GET, queryset=g)
     return render(request, '../templates/featured.html', {'p': p, 'g': g})
+
+
+def contact(request):
+    subject = "Contact from shaebrown.me"
+    from_email = request.GET.get('email')
+    phone = request.GET.get('phone')
+    message = request.GET.get('message')
+
+    if phone and message and from_email:
+        message = "From: " + str(from_email) + "\nPhone: " + str(phone) + "\n" + message
+        try:
+            send_mail(subject, message, settings.EMAIL_HOST_USER, ['shaeamandabrown@gmail.com'], fail_silently=False)
+            messages.success(request, "Email sent successfully", extra_tags="alert alert-success")
+        except Exception as e:
+            messages.error(request, "Error, email could not send" + e.__class__.__name__,
+                           extra_tags="alert alert-danger")
+    else:
+        messages.error(request, "Error,  form or request", extra_tags="alert alert-danger")
+    return HttpResponseRedirect(request.GET.get('redirect'))
+
+
 
 
 def all(request):

@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^$', 'projects.views.featured'),
     url(r'^search/$', 'projects.views.search', name='search'),
     url(r'^all$', 'projects.views.all'),
+    url(r'^contact/$', 'projects.views.contact', name='contact'),
     url(r'^admin', include(admin.site.urls)),
     url(r'^(?P<slug>[^\.]+)',
         'projects.views.tag'),

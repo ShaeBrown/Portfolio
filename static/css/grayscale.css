@@ -105,6 +105,16 @@ p {
     }
 }
 
+.alert {
+    margin-top: 25px;
+    padding: 10px;
+    list-style-type: none;
+    display: inline-block;
+}
+
+.messages {
+    background-color: transparent;
+}
 @media(min-width:768px) {
     p {
         margin: 10px 0 35px;
