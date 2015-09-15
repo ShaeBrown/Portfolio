@@ -33,7 +33,8 @@
 
     <!-- Custom CSS -->
     <link href="{% static "css/grayscale.css" %}" rel="stylesheet">
-    <link href="{% static "game-engine-font/styles.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "custom-font/styles.css" %}" rel="stylesheet" type="text/css">
+
     <!-- Custom Fonts -->
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,400' rel='stylesheet' type='text/css'>
@@ -158,7 +159,7 @@
                 </div>
 
                 <div class="col-lg-10 col-lg-offset-1 download-buttons">
-                    <a href={% static "pdf/Resume.png" %} class="btn btn-default btn-sm bottom-buttons">View
+                    <a href="{% static "pdf/Resume.pdf" %}" class="btn btn-default btn-sm bottom-buttons">View
                     Resume</a>
                 </div>
             </div>
@@ -224,10 +225,6 @@
                 </div>
             </form>
 
-
-            <p>If you have any questions, feel free to email, call or check out my social media</p>
-
-            <p><a href="mailto:shaeb@uvic.ca">shaeb@uvic.ca</a>
             </p>
             <ul class="list-inline banner-social-buttons">
                 <li>
@@ -239,7 +236,20 @@
                             class="fa fa-github fa-fw"></i></a>
                 </li>
                 <li>
-                    <a href="" class="btn btn-circle-social"><i class="fa fa-facebook fa-fw"></i></a>
+                    <a href="https://www.facebook.com/shaelynn.brown" class="btn btn-circle-social"><i
+                            class="fa fa-facebook fa-fw"></i></a>
+                </li>
+                <li>
+                    <a href="https://ca.linkedin.com/pub/shaelynn-brown/104/964/462" class="btn btn-circle-social"><i
+                            class="fa fa-linkedin fa-fw"></i></a>
+                </li>
+                <li>
+                    <a href="mailto:shaeb@uvic.ca" class="btn btn-circle-social"><i
+                            class="fa fa-envelope fa-fw"></i></a>
+                </li>
+                <li>
+                    <a style="padding-top: 4px;" href="https://www.hackerrank.com/shaeb"
+                       class="btn btn-circle-social"><i class="icon icon-hackerrank"></i></a>
                 </li>
             </ul>
         </div>
@@ -262,7 +272,6 @@
 <!-- Plugin JavaScript -->
 <script src="{% static 'js/jquery.easing.min.js' %}"></script>
 
-<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
 
 <!-- Custom Theme JavaScript -->
 <script src="{% static  'js/grayscale.js' %}"></script>

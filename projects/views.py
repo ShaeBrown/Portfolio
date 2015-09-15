@@ -41,7 +41,7 @@ def all(request):
     g = codeGroup.objects.all()
     g = CodeFilter(request.GET, queryset=g)
     p = ProjectFilter(request.GET, queryset=p)
-    paginator = Paginator(p, 2)
+    paginator = Paginator(p, 5)
     page = request.GET.get('page')
     try:
         p = paginator.page(page)
@@ -60,9 +60,9 @@ def tag(request, slug):
     g = codeGroup.objects.filter(code__tags__id=slug).distinct()
 
     for group in g:
-        group.c = code.objects.filter(tags__id=slug, group__id=group.id)
+        group.c = list(code.objects.filter(tags__id=slug, group__id=group.id))
 
-    g = CodeFilter(request.GET, queryset=g)
+
     paginator = Paginator(p, 5)
     page = request.GET.get('page')
     try:
@@ -136,7 +136,7 @@ def search(request):
 
     p = ProjectFilter(request.GET, queryset=p)
 
-    paginator = Paginator(p, 2)
+    paginator = Paginator(p, 5)
     page = request.GET.get('page')
     try:
         p = paginator.page(page)

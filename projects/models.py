@@ -18,7 +18,10 @@ class Tag(models.Model):
 class Project(models.Model):
 
     Source = ( ('<i class="icon-gamemaker"></i> <span class="network-name">Get source as GMK</span></a>' , 'GMK'),
-               ('<i class="fa fa-github fa-fw"></i> <span class="network-name">Get source on Github</span></a>','GITHUB'))
+               ('<i class="fa fa-github fa-fw"></i> <span class="network-name">Get source on Github</span></a>',
+                'GITHUB'),
+               ('<i class="fa fa-file-archive-o fa-fw"></i> <span class="network-name">Get source as ZIP</span></a>',
+                'ZIP'))
 
     name = models.CharField(max_length=20)
     info = models.CharField(max_length=50)
@@ -29,8 +32,8 @@ class Project(models.Model):
     image = models.CharField(max_length=200)
     tags =  models.ManyToManyField('Tag')
     source_type = models.CharField(choices=Source, max_length=200)
-    source_url = models.URLField()
-    download_url = models.URLField(blank = True)
+    source_url = models.CharField(max_length=200)
+    download_url = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
@@ -55,7 +58,7 @@ class codeGroup(models.Model):
 class code(models.Model):
 
     id = models.SlugField(primary_key=True,unique=True,max_length=10)
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=20)
     suffix = models.CharField(max_length=4)
     tags =  models.ManyToManyField('Tag')
     description = models.TextField(blank = True)
