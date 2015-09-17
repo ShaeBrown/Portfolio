@@ -1,0 +1,48 @@
+{% for group in g %}
+        <div class="col-lg-12 projects">
+            <div class="btn-group" data-toggle="buttons-checkbox">
+                <h1><a class="btn collapse-data-btn" data-toggle="collapse" href="#{{ group.id | safe }}"
+                       style="font-size: 15px;"><i class="
+                       {% if collapse %}
+                       fa fa-caret-down
+                       {% else %}
+                       fa fa-caret-right
+                       {% endif %}"></i></a>
+                    {% if group.source %}
+                        <a href="{{ group.source | safe }}"> {{ group.name | safe }}</a>
+                    {% else %}
+                        {{ group.name | safe }}
+                    {% endif %}
+                    <small>{{ group.info | safe }}</small>
+
+                </h1>
+            </div>
+
+            <div id="{{ group.id | safe }}" class="collapse
+             {% if collapse %}
+             in
+             {% endif %}
+             col-lg-10 col-lg-offset-1">
+                {% for code in group.c %}
+                    <h2 style="margin: 10px 0px;">{{ code.name | safe }}
+                        <small>.{{ code.suffix | safe }}</small>
+                        {% for t in code.tags.all %}
+                            <a href="{{ t.id | safe }} " class="btn btn-tag"
+                               style="background-color:{{ t.color | safe }};">{{ t.button_contents |safe }}</a>
+                        {% endfor %}
+
+                    </h2>
+                    <p style="margin-bottom: 10px;">{{ code.description | safe }}</p>
+
+                    <div class="btn-group" data-toggle="buttons-checkbox">
+                        <a class="btn collapse-data-btn" data-toggle="collapse" href="#{{ code.id | safe }}">Display Code</a>
+                    </div>
+
+                    <div id="{{ code.id | safe }}" class="collapse">
+                        <script src="{{ code.source | safe }}"></script>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endfor %}

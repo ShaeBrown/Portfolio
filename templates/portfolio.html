@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% block portfolio %}
+
+    <h4>{{ msg }}</h4>
+
+    {% if not p and not g %}
+        <h4>no projects or codes found</h4>
+    {% endif %}
+
+    {% if p %}
+
+        <h5 class="section-header" style="margin-top: 20px;">Projects</h5>
+
+        {% projects p %}
+
+        {% pagination p %}
+
+    {% endif %}
+
+    {% if g %}
+
+        <h5 class="section-header">Code</h5>
+
+        {% codegroups g collapse %}
+
+    {% endif %}
+
+{% endblock %}

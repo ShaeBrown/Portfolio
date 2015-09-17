@@ -101,7 +101,7 @@ p {
 
 @media (min-width: 992px) {
     .download-buttons {
-        margin-top: -45px;
+        margin-top: -35px;
     }
 }
 
@@ -413,7 +413,7 @@ a:focus {
     }
 
     .download-section {
-        padding-top: 100px 0px;
+        padding-top: 100px;
     }
     #map {
         height: 400px;

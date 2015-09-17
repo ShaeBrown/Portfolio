@@ -5,7 +5,7 @@ from projects.models import Project, codeGroup
 class ProjectFilter(django_filters.FilterSet):
     class Meta:
         model = Project
-        order_by = ['name', '-date']
+        order_by = ['-date', 'name']
         fields = []
 
 

@@ -12,7 +12,9 @@ def featured(request):
     p = ProjectFilter(request.GET, queryset=p)
     g = codeGroup.objects.filter(featured=True)
     g = CodeFilter(request.GET, queryset=g)
-    return render(request, '../templates/featured.html', {'p': p, 'g': g})
+    for group in g:
+        group.c = group.codes()
+    return render(request, '../templates/portfolio.html', {'msg' : 'viewing featured..', 'collapse' : 1, 'p': p, 'g': g})
 
 
 def contact(request):
@@ -34,12 +36,15 @@ def contact(request):
     return HttpResponseRedirect(request.GET.get('redirect'))
 
 
-
-
 def all(request):
     p = Project.objects.all()
     g = codeGroup.objects.all()
+
     g = CodeFilter(request.GET, queryset=g)
+
+    for group in g:
+        group.c = group.codes()
+
     p = ProjectFilter(request.GET, queryset=p)
     paginator = Paginator(p, 5)
     page = request.GET.get('page')
@@ -51,7 +56,7 @@ def all(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         p = paginator.page(paginator.num_pages)
-    return render(request, '../templates/all.html', {'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg' : 'viewing all..', 'collapse' : 0, 'p': p, 'g': g})
 
 def tag(request, slug):
     tag = Tag.objects.filter(id=slug).distinct()
@@ -73,10 +78,17 @@ def tag(request, slug):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         p = paginator.page(paginator.num_pages)
-    return render(request, '../templates/tags.html', {'tag': tag, 'p': p, 'g': g})
+
+    msg = "viewing "
+    for t in tag:
+        msg += t.name
+    msg += "..."
+
+    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 0 , 'p': p, 'g': g})
 
 
 def search(request):
+
     if not request.GET.get('input'):
         p = request.session['p']
         g = request.session['g']
@@ -147,5 +159,9 @@ def search(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         p = paginator.page(paginator.num_pages)
 
+    msg = 'viewing search for \"'
+    for q in query:
+        msg += q + " "
+    msg += '\"...'
 
-    return render(request, '../templates/search.html', {'query': query, 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 1, 'p': p, 'g': g})

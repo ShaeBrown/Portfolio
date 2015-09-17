@@ -17,7 +17,7 @@ class Tag(models.Model):
 
 class Project(models.Model):
 
-    Source = ( ('<i class="icon-gamemaker"></i> <span class="network-name">Get source as GMK</span></a>' , 'GMK'),
+    Source = ( ('<i class="icon-gamemaker"></i> <span class="network-name">Get source as GM</span></a>' , 'GM'),
                ('<i class="fa fa-github fa-fw"></i> <span class="network-name">Get source on Github</span></a>',
                 'GITHUB'),
                ('<i class="fa fa-file-archive-o fa-fw"></i> <span class="network-name">Get source as ZIP</span></a>',
@@ -34,6 +34,7 @@ class Project(models.Model):
     source_type = models.CharField(choices=Source, max_length=200)
     source_url = models.CharField(max_length=200)
     download_url = models.CharField(max_length=200, blank=True)
+    preview_url = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name

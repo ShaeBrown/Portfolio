@@ -3,6 +3,7 @@
 
 <head>
     {% load staticfiles %}
+    {% load tags  %}
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -124,6 +125,61 @@
 
     <h3 class="section-header line-header">Portfolio</h3>
 
+    <div class="col-lg-12">
+
+        <div class="btn-group" role="group" aria-label="..." style="margin-bottom: 200px;">
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary-disabled">View</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/all">All</a></li>
+                    <li><a href="/">Featured</a></li>
+                    <li role="separator" class="divider"></li>
+                    {% topTags %}
+
+                </ul>
+            </div>
+
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary-disabled">Sort by</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+
+                <ul class="dropdown-menu">
+                    <form action="" method="GET">
+                        <li>
+                            <button class="dropdown-buttons" id="id_o" name="o" value="-date" type="submit">Date
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-buttons" id="id_o" name="o" type="submit" value="name">Name</button>
+                        </li>
+                    </form>
+                </ul>
+
+            </div>
+
+
+            <form action="{% url 'search' %}" method="GET">
+                <div class="input-group form-group">
+                    <input type="text" name="input" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <input class="btn btn-primary" type="submit" value="Go!">
+                     </span>
+                </div>
+            </form>
+            <!-- /input-group -->
+        </div>
+    </div>
 
     {% block portfolio %}{% endblock %}
 
