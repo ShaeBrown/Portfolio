@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from projects.models import Project, codeGroup, code, Tag
 from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from projects.filters import ProjectFilter, CodeFilter
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -46,16 +45,6 @@ def all(request):
         group.c = group.codes()
 
     p = ProjectFilter(request.GET, queryset=p)
-    paginator = Paginator(p, 5)
-    page = request.GET.get('page')
-    try:
-        p = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        p = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        p = paginator.page(paginator.num_pages)
     return render(request, '../templates/portfolio.html', {'msg' : 'viewing all..', 'collapse' : 0, 'p': p, 'g': g})
 
 def tag(request, slug):
@@ -66,18 +55,6 @@ def tag(request, slug):
 
     for group in g:
         group.c = list(code.objects.filter(tags__id=slug, group__id=group.id))
-
-
-    paginator = Paginator(p, 5)
-    page = request.GET.get('page')
-    try:
-        p = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        p = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        p = paginator.page(paginator.num_pages)
 
     msg = "viewing "
     for t in tag:
@@ -147,17 +124,6 @@ def search(request):
         request.session['q'] = query
 
     p = ProjectFilter(request.GET, queryset=p)
-
-    paginator = Paginator(p, 5)
-    page = request.GET.get('page')
-    try:
-        p = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        p = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        p = paginator.page(paginator.num_pages)
 
     msg = 'viewing search for \"'
     for q in query:

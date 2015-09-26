@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load pagination_tags %}
 {% load tags %}
 {% block portfolio %}
+
 
     <h4>{{ msg }}</h4>
 
@@ -10,11 +12,13 @@
 
     {% if p %}
 
+        {% autopaginate p.qs 2 as p %}
+
         <h5 class="section-header" style="margin-top: 20px;">Projects</h5>
 
         {% projects p %}
 
-        {% pagination p %}
+        {% paginate %}
 
     {% endif %}
 

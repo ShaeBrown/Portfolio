@@ -1,0 +1,25 @@
+{% if is_paginated %}
+    {% load i18n %}
+        <nav>
+            <ul class="pagination">
+
+                 {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}">
+                        <span style="font-size: 20px;">&laquo;</span>
+                    </a>
+                {% endif %}
+
+                <span class="current">
+            Page {{ page_obj.number }} of {{ paginator.num_pages }}
+  </span>
+
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}">
+                        <span style="font-size: 20px;">&raquo;</span>
+                    </a>
+                {% endif %}
+
+            </ul>
+        </nav>
+    {% endif %}

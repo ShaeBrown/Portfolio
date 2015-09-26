@@ -18,7 +18,3 @@ def projects(p):
 @register.inclusion_tag('codegroup.html')
 def codegroups(g, collapse):
     return {'g': g, 'collapse' : collapse}
-
-@register.inclusion_tag('pagination.html')
-def pagination(p):
-    return {'p': p }
