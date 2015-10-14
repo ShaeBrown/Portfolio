@@ -114,6 +114,7 @@ def search(request):
 
             g = g + list(set(c) - set(g))
 
+
         else:
 
             p = Project.objects.all()
@@ -130,4 +131,4 @@ def search(request):
         msg += q + " "
     msg += '\"...'
 
-    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 1, 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 0, 'p': p, 'g': g})

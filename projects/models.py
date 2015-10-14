@@ -35,6 +35,7 @@ class Project(models.Model):
     source_url = models.CharField(max_length=200)
     download_url = models.CharField(max_length=200, blank=True)
     preview_url = models.CharField(max_length=200, blank=True)
+    group = models.BooleanField()
 
     def __str__(self):
         return self.name

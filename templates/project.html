@@ -8,6 +8,9 @@
                         {% else %}
                             <i style="font-size: 20px;" class="fa fa-check-square-o"></i>
                         {% endif %}
+                        {% if post.group %}
+                            <i style="font-size: 20px;" class="fa fa-users"></i>
+                        {% endif %}
                         {{ post.name }}
                         <small>{{ post.info }}</small>
                         <small class="date">{{ post.date }}</small>
