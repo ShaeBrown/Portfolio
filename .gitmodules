@@ -1,0 +1,3 @@
+[submodule "static/resume/responsive-resume"]
+	path = static/resume/responsive-resume
+	url = https://github.com/ShaeBrown/responsive-resume.git
