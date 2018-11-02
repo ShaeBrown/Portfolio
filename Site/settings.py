@@ -12,18 +12,16 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import random
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mt7l^1m^x&_(4(_83&-rjyrhr@fcnekevuhy42+7$pxv=7j!17'
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = ''.join(random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50))
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -32,11 +30,9 @@ STATICFILES_DIRS = (
 )
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'shaeamandabrown@gmail.com'
-EMAIL_HOST_PASSWORD = 'qwertyuiop098'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
 EMAIL_TIMEOUT = 30
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -116,7 +112,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 
 # Static files (CSS, JavaScript, Images)

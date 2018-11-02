@@ -1,19 +1,20 @@
 from django.shortcuts import render, HttpResponseRedirect
-from projects.models import Project, codeGroup, code, Tag
+from projects.models import Project, CodeGroup, Code, Tag
 from django.db.models import Q
 from projects.filters import ProjectFilter, CodeFilter
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
+import os
 
 def featured(request):
     p = Project.objects.filter(featured=True)
     p = ProjectFilter(request.GET, queryset=p)
-    g = codeGroup.objects.filter(featured=True)
+    g = CodeGroup.objects.filter(featured=True)
     g = CodeFilter(request.GET, queryset=g)
     for group in g:
         group.c = group.codes()
-    return render(request, '../templates/portfolio.html', {'msg' : 'viewing featured..', 'collapse' : 1, 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': 'viewing featured..', 'collapse': 1, 'p': p, 'g': g})
 
 
 def contact(request):
@@ -22,10 +23,12 @@ def contact(request):
     phone = request.GET.get('phone')
     message = request.GET.get('message')
 
-    if phone and message and from_email:
+    if message and from_email:
         message = "From: " + str(from_email) + "\nPhone: " + str(phone) + "\n" + message
+        auth_pass = os.environ.get('gmail_pass')
         try:
-            send_mail(subject, message, settings.EMAIL_HOST_USER, ['shaeamandabrown@gmail.com'], fail_silently=False)
+            send_mail(subject, message, settings.EMAIL_HOST_USER, ['shaeamandabrown@gmail.com'],
+                      auth_password=auth_pass, fail_silently=False)
             messages.success(request, "Email sent successfully", extra_tags="alert alert-success")
         except Exception as e:
             messages.error(request, "Error, email could not send" + e.__class__.__name__,
@@ -37,7 +40,7 @@ def contact(request):
 
 def all(request):
     p = Project.objects.all()
-    g = codeGroup.objects.all()
+    g = CodeGroup.objects.all()
 
     g = CodeFilter(request.GET, queryset=g)
 
@@ -45,43 +48,39 @@ def all(request):
         group.c = group.codes()
 
     p = ProjectFilter(request.GET, queryset=p)
-    return render(request, '../templates/portfolio.html', {'msg' : 'viewing all..', 'collapse' : 0, 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': 'viewing all..', 'collapse': 0, 'p': p, 'g': g})
+
 
 def tag(request, slug):
     tag = Tag.objects.filter(id=slug).distinct()
     p = Project.objects.filter(tags__id=slug).distinct()
     p = ProjectFilter(request.GET, queryset=p)
-    g = codeGroup.objects.filter(code__tags__id=slug).distinct()
+    g = CodeGroup.objects.filter(code__tags__id=slug).distinct()
 
     for group in g:
-        group.c = list(code.objects.filter(tags__id=slug, group__id=group.id))
+        group.c = list(Code.objects.filter(tags__id=slug, group__id=group.id))
 
     msg = "viewing "
     for t in tag:
         msg += t.name
     msg += "..."
 
-    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 0 , 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse': 0, 'p': p, 'g': g})
 
 
 def search(request):
-
     if not request.GET.get('input'):
         p = request.session['p']
         g = request.session['g']
         query = request.session['q']
 
     if request.GET.get('input'):
-
         query = request.GET.get('input').split()
-
         if query:
-
             pset = Q()
             gset = Q()
             cset = Q()
             codeset = Q()
-
             for term in query:
                 pset |= Q(name__contains=term)
                 pset |= Q(info__contains=term)
@@ -99,9 +98,9 @@ def search(request):
                 codeset |= Q(description__contains=term)
                 codeset |= Q(name__contains=term)
 
-            c = codeGroup.objects.filter(cset).distinct()
+            c = CodeGroup.objects.filter(cset).distinct()
             p = Project.objects.filter(pset).distinct()
-            g = codeGroup.objects.filter(gset).distinct()
+            g = CodeGroup.objects.filter(gset).distinct()
 
             for group in g:
                 group.c = group.codes()
@@ -113,12 +112,9 @@ def search(request):
             c = list(c)
 
             g = g + list(set(c) - set(g))
-
-
         else:
-
             p = Project.objects.all()
-            g = codeGroup.objects.all()
+            g = CodeGroup.objects.all()
 
         request.session['p'] = p
         request.session['g'] = g
@@ -131,4 +127,4 @@ def search(request):
         msg += q + " "
     msg += '\"...'
 
-    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse' : 0, 'p': p, 'g': g})
+    return render(request, '../templates/portfolio.html', {'msg': msg, 'collapse': 0, 'p': p, 'g': g})

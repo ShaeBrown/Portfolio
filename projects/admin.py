@@ -1,12 +1,12 @@
 
-from projects.models import Project, Tag, codeGroup, code
+from projects.models import Project, Tag, CodeGroup, Code
 from django.contrib import admin
 
 
 admin.site.register(Project)
 admin.site.register(Tag)
-admin.site.register(codeGroup)
-admin.site.register(code)
+admin.site.register(CodeGroup)
+admin.site.register(Code)
 
 
 

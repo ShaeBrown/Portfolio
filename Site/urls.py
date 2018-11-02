@@ -16,14 +16,15 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from projects import views
 
 urlpatterns = [
-    url(r'^$', 'projects.views.featured'),
-    url(r'^search/$', 'projects.views.search', name='search'),
-    url(r'^all$', 'projects.views.all'),
-    url(r'^contact/$', 'projects.views.contact', name='contact'),
-    url(r'^admin', include(admin.site.urls)),
+    url(r'^$', views.featured),
+    url(r'^search/$',views.search, name='search'),
+    url(r'^all$', views.all),
+    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^admin', admin.site.urls),
     url(r'^(?P<slug>[^\.]+)',
-        'projects.views.tag'),
+        views.tag),
 
 ]
