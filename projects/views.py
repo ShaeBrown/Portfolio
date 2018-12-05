@@ -1,11 +1,14 @@
-from django.shortcuts import render, HttpResponseRedirect
-from projects.models import Project, CodeGroup, Code, Tag
-from django.db.models import Q
-from projects.filters import ProjectFilter, CodeFilter
-from django.core.mail import send_mail
-from django.contrib import messages
-from django.conf import settings
 import os
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.db.models import Q
+from django.shortcuts import render, HttpResponseRedirect
+
+from projects.filters import ProjectFilter, CodeFilter
+from projects.models import Project, CodeGroup, Code, Tag
+
 
 def featured(request):
     p = Project.objects.filter(featured=True)
