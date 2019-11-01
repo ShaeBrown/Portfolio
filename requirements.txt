@@ -1,4 +1,4 @@
-Django==1.8.4
+Django==1.11.23
 django-filter==0.11.0
 django-pagination-py3==1.1.1
 pytz==2018.7
